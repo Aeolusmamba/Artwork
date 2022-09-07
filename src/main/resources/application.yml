@@ -1,0 +1,39 @@
+server:
+  port: 8888
+  address: 0.0.0.0
+#  ssl:
+#    key-store: classpath:www.homebersy.xyz.jks
+#    enabled: true
+#    key-store-password: y7fp0zdzi3
+#    key-store-type: JKS
+  max-http-header-size: 8192
+  tomcat:
+    accept-count: 200
+    threads:
+      max: 350
+    basedir: tomcat
+#    accesslog:
+#      enabled: true
+#      suffix: .log
+#      prefix: access_log
+#      file-date-format: .yyyy-MM-dd
+#      directory: logs
+#      pattern: common
+spring:
+  datasource:
+    name: artwork
+    url: jdbc:mysql://localhost:3306/artwork?serverTimezone=UTC
+    username: root
+    password: Lipeihong0419{}??  #Lipeihong0419{}??  123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.aeo.artwork.bean
+#http-port: 8888
+#logging:
+#  level:
+#    org.apache.tomcat: DEBUG
+#    org.apache.catalina: DEBUG
+
+
+
