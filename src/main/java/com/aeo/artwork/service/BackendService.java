@@ -14,4 +14,10 @@ public interface BackendService {
     Result deleteArticle(Integer id);
 
     Result editArticle(Map<String, Object> requestMap);
+
+    Result publishGoods(Map<String, Object> requestMap);
+
+    Result deleteGoods(Integer id);
+
+    Result editGoods(Map<String, Object> requestMap);
 }

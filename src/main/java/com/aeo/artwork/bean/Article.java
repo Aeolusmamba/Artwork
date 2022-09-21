@@ -6,6 +6,9 @@ public class Article {
     private String summary;
     private String cover;
     private String author;
+
+    private Integer type;
+
     private String content;
     private String time;
 
@@ -47,6 +50,14 @@ public class Article {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getContent() {

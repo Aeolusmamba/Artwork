@@ -17,8 +17,9 @@ public class ArtworkController {
     public ArticleListResult returnArticleList(@RequestParam(value = "queryId", required = false) Integer queryId,
                                             @RequestParam(value = "queryTitle", required = false) String queryTitle,
                                             @RequestParam(value = "pagenum", required = false) Integer pagenum,
-                                            @RequestParam(value = "pagesize", required = false) Integer pagesize) {
-        return artworkService.returnArticleList(queryId, queryTitle, pagenum, pagesize);
+                                            @RequestParam(value = "pagesize", required = false) Integer pagesize,
+                                               @RequestParam(value = "type", required = false) Integer type) {
+        return artworkService.returnArticleList(queryId, queryTitle, pagenum, pagesize, type);
     }
 
     @RequestMapping(value = "/artwork/articleDetail", method = {RequestMethod.GET})

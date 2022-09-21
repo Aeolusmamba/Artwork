@@ -13,21 +13,22 @@ import java.util.ArrayList;
 @Repository
 public interface ArtworkDao {
 
-    @Select("Select id, title, summary, cover, author, time from article limit #{limit} offset #{offset}")
-    ArrayList<ArticleInfo> getArticleList(@Param("limit")Integer limit, @Param("offset")Integer offset);
+    @Select("Select id, title, summary, cover, author, time from article where type = #{type} limit #{limit} offset #{offset}")
+    ArrayList<ArticleInfo> getArticleList(@Param("type") Integer type, @Param("limit")Integer limit, @Param("offset")Integer offset);
 
-    @Select("Select id, title, summary, cover, author, time from article where id = #{queryId} limit #{limit} offset #{offset}")
-    ArrayList<ArticleInfo> getArticleListByQueryID(@Param("queryId") Integer queryId, @Param("limit") Integer limit, @Param("offset") Integer offset);
+    @Select("Select id, title, summary, cover, author, time from article where id = #{queryId} and type = #{type} " +
+            "limit #{limit} offset #{offset}")
+    ArrayList<ArticleInfo> getArticleListByQueryID(@Param("queryId") Integer queryId, @Param("type") Integer type, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
     @Select("Select id, title, summary, cover, author, time from article where title like concat('%', #{queryTitle}, '%') " +
-            "limit #{limit} offset #{offset}")
-    ArrayList<ArticleInfo> getArticleListByQueryTitle(@Param("queryTitle") String queryTitle, @Param("limit") Integer limit, @Param("offset") Integer offset);
+            "and type = #{type} limit #{limit} offset #{offset}")
+    ArrayList<ArticleInfo> getArticleListByQueryTitle(@Param("queryTitle") String queryTitle, @Param("type") Integer type, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    @Select("Select count(*) from article where title like concat('%', #{queryTitle}, '%')")
-    Integer getArticleNumByQueryTitle(@Param("queryTitle") String queryTitle);
+    @Select("Select count(*) from article where title like concat('%', #{queryTitle}, '%') and type = #{type}")
+    Integer getArticleNumByQueryTitle(@Param("queryTitle") String queryTitle, @Param("type") Integer type);
 
-    @Select("Select count(*) from article")
-    Integer getArticleNum();
+    @Select("Select count(*) from article where type = #{type}")
+    Integer getArticleNum(@Param("type") Integer type);
 
     @Select("Select * from article where id = #{id}")
     Article getArticleDetail(Integer id);

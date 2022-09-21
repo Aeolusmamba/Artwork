@@ -33,4 +33,19 @@ public class BackendController {
         return backendService.editArticle(requestMap);
     }
 
+    @PostMapping("/artwork/backend/publishGoods")
+    public Result publishGoods(@RequestBody Map<String, Object> requestMap){
+        return backendService.publishGoods(requestMap);
+    }
+
+    @DeleteMapping("/artwork/backend/{id}/deleteGoods")
+    public Result deleteGoods(@PathVariable("id") Integer id){
+        return backendService.deleteGoods(id);
+    }
+
+    @PostMapping("/artwork/backend/editGoods")
+    public Result editGoods(@RequestBody Map<String, Object> requestMap){
+        return backendService.editGoods(requestMap);
+    }
+
 }

@@ -19,7 +19,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     ArtworkDao artworkDao;
 
     @Override
-    public ArticleListResult returnArticleList(Integer queryId, String queryTitle, Integer pagenum, Integer pagesize) {
+    public ArticleListResult returnArticleList(Integer queryId, String queryTitle, Integer pagenum, Integer pagesize, Integer type) {
         ArticleListResult result = new ArticleListResult();
         ArrayList<ArticleInfo> tempArticleList;
         ArrayList<ArticleInfo2> articleList = new ArrayList<>();
@@ -31,17 +31,20 @@ public class ArtworkServiceImpl implements ArtworkService {
             if(pagesize == null){
                 pagesize = 10;
             }
+            if(type == null){
+                type = 0;
+            }
             if(queryId != null){  //按id查询搜索
-                tempArticleList = artworkDao.getArticleListByQueryID(queryId, pagesize, (pagenum - 1) * pagesize);
+                tempArticleList = artworkDao.getArticleListByQueryID(queryId, type, pagesize, (pagenum - 1) * pagesize);
                 totalNum = tempArticleList.size();
             }
             else if(queryTitle != null && !queryTitle.equals("")){  //按title查询搜索
-                tempArticleList = artworkDao.getArticleListByQueryTitle(queryTitle, pagesize, (pagenum - 1) * pagesize);
-                totalNum = artworkDao.getArticleNumByQueryTitle(queryTitle);
+                tempArticleList = artworkDao.getArticleListByQueryTitle(queryTitle, type, pagesize, (pagenum - 1) * pagesize);
+                totalNum = artworkDao.getArticleNumByQueryTitle(queryTitle, type);
             }
             else{
-                tempArticleList = artworkDao.getArticleList(pagesize, (pagenum - 1) * pagesize);
-                totalNum = artworkDao.getArticleNum();
+                tempArticleList = artworkDao.getArticleList(type, pagesize, (pagenum - 1) * pagesize);
+                totalNum = artworkDao.getArticleNum(type);
             }
             if(tempArticleList.isEmpty()){
                 result.setMsg("没有更多数据了");

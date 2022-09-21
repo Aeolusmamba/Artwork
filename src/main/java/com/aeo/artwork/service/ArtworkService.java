@@ -6,7 +6,7 @@ import com.aeo.artwork.bean.Result;
 
 public interface ArtworkService {
 
-    ArticleListResult returnArticleList(Integer queryId, String queryTitle, Integer pagenum, Integer pagesize);
+    ArticleListResult returnArticleList(Integer queryId, String queryTitle, Integer pagenum, Integer pagesize, Integer type);
 
     ArticleDetailResult returnArticleDetail(Integer id);
 }
