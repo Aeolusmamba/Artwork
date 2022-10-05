@@ -6,6 +6,7 @@ public class GoodsInfo2 {
     private Integer id;
     private String name;
     private JSONArray cover = new JSONArray();
+    private float coverScale;
     private String time;
 
     public Integer getId() {
@@ -30,6 +31,14 @@ public class GoodsInfo2 {
 
     public void setCover(JSONArray cover) {
         this.cover = cover;
+    }
+
+    public float getCoverScale() {
+        return coverScale;
+    }
+
+    public void setCoverScale(float coverScale) {
+        this.coverScale = coverScale;
     }
 
     public String getTime() {

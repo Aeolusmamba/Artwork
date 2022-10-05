@@ -159,6 +159,8 @@ public class BackendServiceImpl implements BackendService {
 //            System.out.println(contentStr);
                 commodity.setDetail(detailStr);
             }
+            if (requestMap.get("link") != null)
+                commodity.setLink(requestMap.get("link").toString());
             commodity.setTime(CurrentTime.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
             backendDao.publishGoods(commodity);
 //            result.setJsonObject(JSON.parseObject(contentStr));
@@ -203,7 +205,14 @@ public class BackendServiceImpl implements BackendService {
                 commodity.setName(requestMap.get("name").toString());
             }
             if (requestMap.get("id") != null){
-                commodity.setId((Integer) requestMap.get("id"));
+                Integer id = (Integer) requestMap.get("id");
+                Integer idNum = backendDao.countId(id);
+                if(idNum == null || idNum.equals(0)){
+                    result.getMeta().setStatus(500);
+                    result.getMeta().setMsg("商品不存在");
+                    return result;
+                }
+                commodity.setId(id);
             }else{
                 result.getMeta().setStatus(500);
                 result.getMeta().setMsg("未指定商品id");
@@ -215,6 +224,8 @@ public class BackendServiceImpl implements BackendService {
                 String detailStr = JSON.toJSONString(requestMap.get("detail"));
                 commodity.setDetail(detailStr);
             }
+            if (requestMap.get("link") != null)
+                commodity.setLink(requestMap.get("link").toString());
             commodity.setTime(CurrentTime.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
             backendDao.editGoods(commodity);
         } catch (Exception e) {

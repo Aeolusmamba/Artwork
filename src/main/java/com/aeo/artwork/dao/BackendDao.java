@@ -23,14 +23,18 @@ public interface BackendDao {
             "time=#{time} where id=#{id}")
     void editArticle(Article article);
 
-    @Insert("Insert into commodity (name, cover, detail, time) " +
-            "values (#{name}, #{cover}, #{detail}, #{time})")
+    @Insert("Insert into commodity (name, cover, detail, link, time) " +
+            "values (#{name}, #{cover}, #{detail}, #{link}, #{time})")
     void publishGoods(Commodity commodity);
 
     @Delete("Delete from commodity where id = #{id}")
     Integer deleteGoods(Integer id);
 
-    @Update("Update commodity set name=#{name}, cover=#{cover}, detail=#{detail}, " +
+    @Update("Update commodity set name=#{name}, cover=#{cover}, detail=#{detail}, link=#{link}, " +
             "time=#{time} where id=#{id}")
     void editGoods(Commodity commodity);
+
+
+    @Select("Select count(*) from commodity where id = #{id}")
+    Integer countId(Integer id);
 }

@@ -5,6 +5,8 @@ public class Commodity {
     private String name;
     private String cover;
     private String detail;
+
+    private String link;
     private String time;
 
     public Integer getId() {
@@ -37,6 +39,14 @@ public class Commodity {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getTime() {

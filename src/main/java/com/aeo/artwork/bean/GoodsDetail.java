@@ -8,6 +8,7 @@ public class GoodsDetail {
     private String name;
     private JSONArray cover = new JSONArray();
     private JSONObject detail = new JSONObject();
+    private String link;
     private String time;
 
     public Integer getId() {
@@ -41,6 +42,14 @@ public class GoodsDetail {
 
     public void setDetail(JSONObject detail) {
         this.detail = detail;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getTime() {

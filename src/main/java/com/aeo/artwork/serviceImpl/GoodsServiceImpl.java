@@ -3,6 +3,7 @@ package com.aeo.artwork.serviceImpl;
 import com.aeo.artwork.bean.*;
 import com.aeo.artwork.dao.GoodsDao;
 import com.aeo.artwork.service.GoodsService;
+import com.aeo.artwork.tools.GCD;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -10,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 @Transactional(rollbackFor = RuntimeException.class)
@@ -55,6 +60,22 @@ public class GoodsServiceImpl implements GoodsService {
                     Object object = JSON.parse(g.getCover());
                     if(object instanceof JSONArray){
                         goodsInfo2.setCover((JSONArray) object);
+                        String coverUrl = goodsInfo2.getCover().getJSONObject(0).getString("url");
+                        if(coverUrl != null && !coverUrl.equals("")){
+                            String[] coverNames = coverUrl.split("/");
+                            String coverName = coverNames[coverNames.length - 1];
+                            // /home/ubuntu/artwork/server-main/upload-files/  E:\Outsourcing\test_image\
+                            File file = new File("/home/ubuntu/artwork/server-main/upload-files/" + coverName);
+                            BufferedImage bufferedImage = ImageIO.read(Files.newInputStream(file.toPath()));
+                            int height = bufferedImage.getHeight();
+                            int width = bufferedImage.getWidth();
+//                          System.out.println(height + "   " + width);
+                            int gcd = GCD.gcd(width, height);
+                            height /= gcd;
+                            width /= gcd;
+//                            System.out.println((float)(Math.round((float)width / height * 100)) / 100);
+                            goodsInfo2.setCoverScale((float)(Math.round((float)width / height * 100)) / 100);
+                        }
                     }
                 }
                 goodsInfo2.setName(g.getName());
@@ -100,6 +121,7 @@ public class GoodsServiceImpl implements GoodsService {
             if(object2 instanceof JSONObject){
                 goodsDetail.setDetail((JSONObject) object2);
             }
+            goodsDetail.setLink(commodity.getLink());
             goodsDetail.setTime(commodity.getTime());
             result.setGoods(goodsDetail);
         }catch(Exception e){
