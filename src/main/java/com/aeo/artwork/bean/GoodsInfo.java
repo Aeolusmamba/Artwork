@@ -6,6 +6,8 @@ public class GoodsInfo {
     private Integer id;
     private String name;
     private String cover;
+    private String link;
+    private Double price;
     private String time;
 
     public Integer getId() {
@@ -30,6 +32,22 @@ public class GoodsInfo {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getTime() {

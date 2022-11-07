@@ -56,7 +56,7 @@ public class GoodsServiceImpl implements GoodsService {
             for (GoodsInfo g: tempGoodsList){
                 GoodsInfo2 goodsInfo2 = new GoodsInfo2();
                 goodsInfo2.setId(g.getId());
-                if(g.getCover() != null && !g.getCover().equals("")){
+                if(g.getCover() != null && !g.getCover().equals("") && !g.getCover().equals("[]")){
                     Object object = JSON.parse(g.getCover());
                     if(object instanceof JSONArray){
                         goodsInfo2.setCover((JSONArray) object);
@@ -79,6 +79,8 @@ public class GoodsServiceImpl implements GoodsService {
                     }
                 }
                 goodsInfo2.setName(g.getName());
+                goodsInfo2.setLink(g.getLink());
+                goodsInfo2.setPrice(g.getPrice());
                 goodsInfo2.setTime(g.getTime());
                 goodsList.add(goodsInfo2);
             }
@@ -122,6 +124,7 @@ public class GoodsServiceImpl implements GoodsService {
                 goodsDetail.setDetail((JSONObject) object2);
             }
             goodsDetail.setLink(commodity.getLink());
+            goodsDetail.setPrice(commodity.getPrice());
             goodsDetail.setTime(commodity.getTime());
             result.setGoods(goodsDetail);
         }catch(Exception e){

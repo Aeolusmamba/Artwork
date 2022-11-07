@@ -5,8 +5,8 @@ public class Commodity {
     private String name;
     private String cover;
     private String detail;
-
     private String link;
+    private Double price;
     private String time;
 
     public Integer getId() {
@@ -47,6 +47,14 @@ public class Commodity {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getTime() {

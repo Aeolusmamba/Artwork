@@ -13,18 +13,18 @@ import java.util.ArrayList;
 @Repository
 public interface GoodsDao {
 
-    @Select("Select id, name, cover, time from commodity where id=#{queryId}" +
+    @Select("Select id, name, cover, link, price, time from commodity where id=#{queryId}" +
             " limit #{limit} offset #{offset}")
     ArrayList<GoodsInfo> getGoodsListByQueryID(@Param("queryId") Integer queryId, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    @Select("Select id, name, cover, time from commodity where name like concat('%', #{queryName}, '%') " +
+    @Select("Select id, name, cover, link, price, time from commodity where name like concat('%', #{queryName}, '%') " +
             "limit #{limit} offset #{offset}")
     ArrayList<GoodsInfo> getGoodsListByQueryName(@Param("queryName") String queryName, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
     @Select("Select count(*) from commodity where name like concat('%', #{queryName}, '%')")
     Integer getGoodsNumByQueryName(@Param("queryName") String queryName);
 
-    @Select("Select id, name, cover, time from commodity limit #{limit} offset #{offset}")
+    @Select("Select id, name, cover, link, price, time from commodity limit #{limit} offset #{offset}")
     ArrayList<GoodsInfo> getGoodsList(@Param("limit") Integer limit, @Param("offset") Integer offset);
 
 

@@ -161,6 +161,10 @@ public class BackendServiceImpl implements BackendService {
             }
             if (requestMap.get("link") != null)
                 commodity.setLink(requestMap.get("link").toString());
+            if (requestMap.get("price") != null){
+                String priceStr = requestMap.get("price").toString();
+                commodity.setPrice(Double.valueOf(priceStr));  // 前端限制数据类型为浮点数
+            }
             commodity.setTime(CurrentTime.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
             backendDao.publishGoods(commodity);
 //            result.setJsonObject(JSON.parseObject(contentStr));
@@ -226,6 +230,10 @@ public class BackendServiceImpl implements BackendService {
             }
             if (requestMap.get("link") != null)
                 commodity.setLink(requestMap.get("link").toString());
+            if (requestMap.get("price") != null){
+                String priceStr = requestMap.get("price").toString();
+                commodity.setPrice(Double.valueOf(priceStr));  // 前端限制数据类型为浮点数
+            }
             commodity.setTime(CurrentTime.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
             backendDao.editGoods(commodity);
         } catch (Exception e) {

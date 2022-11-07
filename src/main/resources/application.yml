@@ -24,7 +24,7 @@ spring:
     name: artwork
     url: jdbc:mysql://localhost:3306/artwork?serverTimezone=UTC
     username: root
-    password: Lipeihong0419{}??  #Lipeihong0419{}??  123456
+    password: Lipeihong0419{}??  #Lipeihong0419{}??  123456  别忘了改商品封面存放路径哦~  GoodsServiceImpl.returnGoodsList
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mapper/*.xml
